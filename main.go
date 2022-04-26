@@ -63,14 +63,16 @@ func main() {
 	}
 	root := flag.String("root", cwd, "Directory for download")
 	flag.Parse()
-	log.Println("开始执行...")
-	err = run(*root, *cookie, *lux)
-	if err != nil {
-		log.Println("执行失败：", err)
-	} else {
-		log.Println("执行成功")
-	}
+	for {
+		log.Println("开始执行...")
+		err = run(*root, *cookie, *lux)
+		if err != nil {
+			log.Println("执行失败：", err)
+		} else {
+			log.Println("执行成功")
+		}
 
-	log.Printf("下次执行时间：%s", time.Now().Add(time.Duration(*interval)*time.Second))
-	time.Sleep(time.Duration(*interval) * time.Second)
+		log.Printf("下次执行时间：%s", time.Now().Add(time.Duration(*interval)*time.Second))
+		time.Sleep(time.Duration(*interval) * time.Second)
+	}
 }
